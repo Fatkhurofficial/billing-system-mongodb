@@ -1,0 +1,32 @@
+# Simplified Dockerfile for Koyeb
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Install basic dependencies
+RUN apk add --no-cache bash python3 make g++
+
+# Copy package.json
+COPY package.json ./
+
+# Install ALL dependencies (not just production)
+# This ensures we don't miss any required packages
+RUN npm install
+
+# Copy application
+COPY . .
+
+# Create directories
+RUN mkdir -p data whatsapp-session public/img/packages logs
+
+# Make start script executable
+RUN chmod +x start.sh
+
+# Expose port
+EXPOSE 4555
+
+# Environment
+ENV NODE_ENV=production PORT=4555
+
+# Start
+CMD ["./start.sh"]

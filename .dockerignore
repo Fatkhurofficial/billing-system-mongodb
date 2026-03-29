@@ -1,27 +1,15 @@
-# Node modules (will be installed in container)
+# Node modules (will be installed fresh)
 node_modules
 npm-debug.log
 yarn-error.log
-package-lock.json
-yarn.lock
 
-# Git
-.git
-.gitignore
-.github
-
-# Environment
-.env
-.env.local
-.env.*.local
-
-# Database files (old SQLite)
+# Database files
 *.db
 *.db-shm
 *.db-wal
 *.sqlite
 *.sqlite3
-data/billing.db*
+data/*.db
 
 # Logs
 logs
@@ -51,20 +39,33 @@ tmp
 temp
 *.tmp
 
-# Uploads & sessions
+# Uploads
 uploaded
 uploads
+
+# Sessions (will be created fresh)
 whatsapp-session/*.json
 
-# Documentation (not needed in production)
+# Git
+.git
+.gitignore
+
+# Documentation (keep only essential)
 docs
-*.md
-!README.md
+MONGODB_MIGRATION_NOTES.md
 
 # Backups
 *_backup.js
 *_sqlite_backup.js
 
-# Development files
+# Frontend build (if any)
 frontend/node_modules
+frontend/build
+
+# Python cache
 backend/__pycache__
+*.pyc
+
+# Environment (not needed in Docker)
+.env
+.env.local
