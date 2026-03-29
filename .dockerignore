@@ -1,0 +1,70 @@
+# Node modules (will be installed in container)
+node_modules
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# Git
+.git
+.gitignore
+.github
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Database files (old SQLite)
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+data/billing.db*
+
+# Logs
+logs
+*.log
+
+# Testing
+coverage
+test_reports
+.nyc_output
+
+# Build
+dist
+build
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary
+tmp
+temp
+*.tmp
+
+# Uploads & sessions
+uploaded
+uploads
+whatsapp-session/*.json
+
+# Documentation (not needed in production)
+docs
+*.md
+!README.md
+
+# Backups
+*_backup.js
+*_sqlite_backup.js
+
+# Development files
+frontend/node_modules
+backend/__pycache__

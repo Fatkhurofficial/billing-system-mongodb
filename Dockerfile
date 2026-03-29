@@ -1,43 +1,57 @@
-# Dockerfile untuk Gembok Bill
-# Build dengan: docker build -t gembok-bill .
-# Run dengan: docker run -d -p 3002:3002 --name gembok-bill gembok-bill
+# Use official Node.js LTS Alpine image (lightweight)
+FROM node:20-alpine
 
-FROM node:20-bullseye-slim
+# Set maintainer
+LABEL maintainer="Billing System MongoDB"
+LABEL description="ISP Billing System with MongoDB - Production Ready"
 
 # Set working directory
 WORKDIR /app
 
-# Install sistem dependencies untuk native modules
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    python3-dev \
-    libsqlite3-dev \
-    curl \
-    git \
-    && rm -rf /var/lib/apt/lists/*
+# Install system dependencies
+# Required for some npm packages and better compatibility
+RUN apk add --no-cache \
+    python3 \
+    make \
+    g++ \
+    cairo-dev \
+    jpeg-dev \
+    pango-dev \
+    giflib-dev \
+    bash
 
-# Copy package files
+# Copy package files first (for better caching)
 COPY package*.json ./
 
-# Install dependencies dengan rebuild otomatis
-RUN npm install && npm rebuild
+# Install production dependencies only
+RUN npm ci --only=production && \
+    npm cache clean --force
 
-# Copy aplikasi files
+# Copy application files
 COPY . .
 
-# Create required directories
-RUN mkdir -p data/backup logs whatsapp-session
+# Create necessary directories with proper permissions
+RUN mkdir -p \
+    data \
+    whatsapp-session \
+    public/img/packages \
+    logs && \
+    chmod -R 755 data whatsapp-session public/img/packages logs
 
-# Set permissions
-RUN chmod 755 data/ logs/ whatsapp-session/ && \
-    chmod 644 settings.json
+# Make scripts executable
+RUN chmod +x start.sh && \
+    chmod +x scripts/*.js 2>/dev/null || true
 
-# Expose port
-EXPOSE 3002
+# Expose application port
+EXPOSE 4555
 
-# Health check
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD curl -f http://localhost:3002 || exit 1
+# Set environment variables
+ENV NODE_ENV=production \
+    PORT=4555
 
-# Start aplikasi
-CMD ["npm", "start"]
+# Health check - verify app is running
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+  CMD node -e "require('http').get('http://localhost:4555/health', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})" || exit 1
+
+# Start application using startup script
+CMD ["./start.sh"]
