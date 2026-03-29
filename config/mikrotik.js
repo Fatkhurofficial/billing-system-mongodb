@@ -117,18 +117,18 @@ async function getMikrotikConnection() {
 //     const [rows] = await conn.execute("SELECT username, value as password FROM radcheck WHERE attribute='Cleartext-Password'");
 //     await conn.end();
 //     return rows.map(row => ({ name: row.username, password: row.password }));
-}
+// }
 
 // Fungsi untuk menambah user PPPoE ke RADIUS
-async function addPPPoEUserRadius({ username, password }) {
-    const conn = await getRadiusConnection();
-    await conn.execute(
-        "INSERT INTO radcheck (username, attribute, op, value) VALUES (?, 'Cleartext-Password', ':=', ?)",
-        [username, password]
-    );
-    await conn.end();
-    return { success: true };
-}
+// async function addPPPoEUserRadius({ username, password }) {
+//     const conn = await getRadiusConnection();
+//     await conn.execute(
+//         "INSERT INTO radcheck (username, attribute, op, value) VALUES (?, 'Cleartext-Password', ':=', ?)",
+//         [username, password]
+//     );
+//     await conn.end();
+//     return { success: true };
+// }
 
 // Wrapper: Pilih mode autentikasi dari settings
 async function getPPPoEUsers() {
