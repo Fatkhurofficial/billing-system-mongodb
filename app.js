@@ -485,7 +485,7 @@ function startServer(portToUse) {
     }
 }
 
-const port = getSetting('server_port', 4555);
+const port = process.env.PORT || getSetting("server_port", 4555);
 logger.info(`Attempting to start server on configured port: ${port}`);
 startServer(port);
 

@@ -1,9 +1,5 @@
-# Use official Node.js LTS Alpine image (lightweight)
+# Use official Node.js LTS Alpine image
 FROM node:20-alpine
-
-# Set maintainer
-LABEL maintainer="Billing System MongoDB"
-LABEL description="ISP Billing System with MongoDB - Production Ready"
 
 # Set working directory
 WORKDIR /app
@@ -19,7 +15,7 @@ RUN apk add --no-cache \
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies (use npm install instead of npm ci for better compatibility)
+# Install dependencies
 RUN npm install --production --no-optional && \
     npm cache clean --force
 
@@ -38,16 +34,17 @@ RUN mkdir -p \
 RUN chmod +x start.sh 2>/dev/null || true && \
     chmod +x scripts/*.js 2>/dev/null || true
 
-# Expose application port
-EXPOSE 4555
+# Expose port (Koyeb will use PORT env var)
+EXPOSE 8000
 
 # Set environment variables
+# PORT will be set by Koyeb, default to 8000
 ENV NODE_ENV=production \
-    PORT=4555
+    PORT=8000
 
-# Health check
+# Health check - check on PORT environment variable
 HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
-  CMD node -e "require('http').get('http://localhost:4555/health', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})" || exit 1
+  CMD node -e "const port = process.env.PORT || 8000; require('http').get(\`http://localhost:\${port}/health\`, (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})" || exit 1
 
 # Start application
 CMD ["./start.sh"]

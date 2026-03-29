@@ -7,18 +7,18 @@ services:
       dockerfile: Dockerfile
     
     ports:
-      - port: 4555
+      - port: 8000
         protocol: http
     
     routes:
       - path: /
-        port: 4555
+        port: 8000
     
     env:
       - key: NODE_ENV
         value: production
       - key: PORT
-        value: "4555"
+        value: "8000"
     
     scaling:
       min: 1
@@ -31,8 +31,8 @@ services:
     
     health_checks:
       - type: http
-        port: 4555
+        port: 8000
         path: /health
         interval: 30
         timeout: 10
-        grace_period: 60
+        grace_period: 90
