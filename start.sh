@@ -2,14 +2,10 @@
 
 echo "🚀 Starting Billing System MongoDB..."
 
-# Wait for potential database connection
-echo "⏳ Waiting 5 seconds for connections..."
-sleep 5
+# Quick database check/setup (max 30 seconds)
+echo "📦 Database check..."
+timeout 30 node scripts/setup-database-mongodb.js 2>&1 || echo "⚡ Continuing to app start..."
 
-# Setup database (create collections if not exist)
-echo "📦 Setting up MongoDB collections..."
-node scripts/setup-database-mongodb.js || echo "⚠️  Database already initialized or error occurred"
-
-# Start application
-echo "✅ Starting application on port 4555..."
+# Start application immediately
+echo "✅ Starting application on port ${PORT:-8000}..."
 exec node app.js
