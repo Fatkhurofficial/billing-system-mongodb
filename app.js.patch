@@ -1,0 +1,1 @@
+# Fix untuk port - app.js harus bisa baca PORT dari environment variable
