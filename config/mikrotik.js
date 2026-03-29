@@ -2,7 +2,6 @@
 const { RouterOSAPI } = require('node-routeros');
 const logger = require('./logger');
 const { getSetting } = require('./settingsManager');
-const mysql = require('mysql2/promise');
 const fs = require('fs');
 const path = require('path');
 const cacheManager = require('./cacheManager');
@@ -103,21 +102,21 @@ async function getMikrotikConnection() {
     }
 }
 
-// Fungsi untuk koneksi ke database RADIUS (MySQL)
-async function getRadiusConnection() {
-    const host = getSetting('radius_host', 'localhost');
-    const user = getSetting('radius_user', 'radius');
-    const password = getSetting('radius_password', 'radius');
-    const database = getSetting('radius_database', 'radius');
-    return await mysql.createConnection({ host, user, password, database });
-}
+// // Fungsi untuk koneksi ke database RADIUS (MySQL)
+// async function getRadiusConnection() {
+//     const host = getSetting('radius_host', 'localhost');
+//     const user = getSetting('radius_user', 'radius');
+//     const password = getSetting('radius_password', 'radius');
+//     const database = getSetting('radius_database', 'radius');
+//     return await mysql.createConnection({ host, user, password, database });
+// }
 
-// Fungsi untuk mendapatkan seluruh user PPPoE dari RADIUS
-async function getPPPoEUsersRadius() {
-    const conn = await getRadiusConnection();
-    const [rows] = await conn.execute("SELECT username, value as password FROM radcheck WHERE attribute='Cleartext-Password'");
-    await conn.end();
-    return rows.map(row => ({ name: row.username, password: row.password }));
+// // Fungsi untuk mendapatkan seluruh user PPPoE dari RADIUS
+// async function getPPPoEUsersRadius() {
+//     const conn = await getRadiusConnection();
+//     const [rows] = await conn.execute("SELECT username, value as password FROM radcheck WHERE attribute='Cleartext-Password'");
+//     await conn.end();
+//     return rows.map(row => ({ name: row.username, password: row.password }));
 }
 
 // Fungsi untuk menambah user PPPoE ke RADIUS
