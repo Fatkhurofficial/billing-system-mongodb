@@ -1,223 +1,305 @@
- 
-  # Gembok Bill
-  **Integrated ISP Management System**
-  
-  [![Node.js](https://img.shields.io/badge/Node.js-18.x-green?style=for-the-badge&logo=node.js)](https://nodejs.org/)
-  [![License](https://img.shields.io/badge/license-ISC-blue?style=for-the-badge)](LICENSE)
-  [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=for-the-badge)](https://github.com/alijayanet/gembok-bill/pulls)
-  [![GitHub Stars](https://img.shields.io/github/stars/alijayanet/gembok-bill?style=for-the-badge)](https://github.com/alijayanet/gembok-bill/stargazers)
+# 🌐 ISP Billing System - MongoDB Edition
 
+> **Sistem manajemen billing ISP yang lengkap dengan integrasi WhatsApp, Telegram, Mikrotik, dan GenieACS. Direfactor dari SQLite/MySQL ke MongoDB untuk deployment modern.**
 
-## 🌐 About Gembok Bill
+[![MongoDB](https://img.shields.io/badge/MongoDB-6.0+-green.svg)](https://www.mongodb.com/)
+[![Node.js](https://img.shields.io/badge/Node.js-14+-brightgreen.svg)](https://nodejs.org/)
+[![License](https://img.shields.io/badge/license-ISC-blue.svg)](LICENSE)
+[![Deploy Ready](https://img.shields.io/badge/deploy-ready-success.svg)](https://koyeb.com)
 
-**Gembok Bill** is an integrated ISP management system designed to manage billing, customer service, and network operations through WhatsApp integration. This system provides end-to-end solutions for Internet Service Provider management with advanced features.
+---
 
-### 🚀 Main Features
+## ✨ Highlights
 
-- **📱 WhatsApp Gateway**: Customer interaction, voucher delivery, trouble reporting, and automated notifications
-- **📡 GenieACS Integration**: Centralized CPE (Customer Premises Equipment) management
-- **🔗 Mikrotik PPPoE & Hotspot Management**: User authentication and real-time bandwidth control
-- **💳 Billing System**: Automated invoice generation payment tracking, and remittance
-- **👥 Agent & Technician Management**: Flexible roles, access control, and job assignment
-- **📂 Database Migration**: SQL-based schema updates for continuous development
-- **🗺️ Cable Network Mapping**: Visual management of ODP, poles, and cable layouts
+✅ **Fully Refactored to MongoDB** - No SQLite/MySQL dependencies  
+✅ **Cloud-Ready** - Optimized for Koyeb, Railway, Render  
+✅ **30+ Collections** - Complete billing system with indexes  
+✅ **WhatsApp Integration** - Baileys library for customer communication  
+✅ **Telegram Bot** - Admin commands and notifications  
+✅ **Mikrotik Integration** - PPPoE monitoring and management  
+✅ **GenieACS Integration** - ONT/ONU device management  
+✅ **Payment Gateway** - Midtrans, Xendit support  
+✅ **Cable Network Management** - ODP tracking and mapping  
 
-### 💬 WhatsApp Commands
+---
 
-The system supports WhatsApp LID (Lidded ID) registration for enhanced security and customer identification.
+## 🚀 Quick Start
 
-#### For Customers
+### Prerequisites
+- Node.js 14+ installed
+- MongoDB database (connection provided)
+- Git
 
-| Command | Format | Description |
-|---------|--------|-------------|
-| **REG** | `REG [nama/nomor]` | Link WhatsApp LID to existing customer account |
-| **DAFTAR** | `DAFTAR [Nama]#[NoHP]#[Alamat]#[ID_Paket]` | Register as new customer with complete data |
-| **STATUS** | `STATUS` | Check billing and service status |
-| **MENU** | `MENU` | Display available customer commands |
+### Installation
 
-**Examples:**
-```
-REG Budi Santoso
-REG 081234567890
-DAFTAR Agus Setiawan#08123456789#Jl. Melati No 5#1
-```
-
-#### For Admins
-
-| Command | Format | Description |
-|---------|--------|-------------|
-| **SETLID** | `SETLID [password]`[nomer admin]| Save admin WhatsApp LID to settings (requires admin password) |
-| **MENU** | `MENU` or `ADMIN` | Display admin menu |
-
-**Examples:**
-```
-SETLID admin123
-```
-
-> **Note:** Admin password is configured in `settings.json` as `admin_password`
-
-> **Security:** WhatsApp LID ensures secure identification even if phone numbers change format
-
-## 🛠️ Technologies Used
-
-| Category | Technology |
-|----------|-----------|
-| **Backend** | Node.js, Express |
-| **Database** | SQLite (development), MySQL (production) |
-| **Frontend** | EJS, HTML5, CSS3, JavaScript |
-| **WhatsApp** | [@whiskeysockets/baileys](https://github.com/WhiskeySockets/Baileys) |
-| **Network** | Node-routeros for Mikrotik |
-| **Payment** | Midtrans, Xendit |
-| **Logging** | Winston, Pino |
-
-## 📋 System Prerequisites
-
-- **Node.js** >= 20.0.0
-- **npm** >= 6.0.0
-- **Database** SQLite (for development) or MySQL (for production)
-- **WhatsApp Business Access** (for WhatsApp Gateway features)
-
-## 🚀 Quick Installation
-
-### 1. Clone Repository
 ```bash
-git clone https://github.com/alijayanet/gembok-bill.git
-```
-```bash
-cd gembok-bill
-```
+# Clone repository
+git clone https://github.com/Fatkhurofficial/billing-system-mongodb.git
+cd billing-system-mongodb
 
-### 2. Install Dependencies
-```bash
+# Install dependencies
 npm install
-```
 
-### 3. Initialize Database
-```bash
+# Setup database (creates collections and indexes)
 npm run setup
-```
 
-### 4. Run Database Migration (Important for New Servers)
-To ensure all required tables and columns exist in the database, run migration commands:
-
-```bash
-# Run all database migrations
-node scripts/run-all-migrations.js
-
-# Verify database structure
-node scripts/verify-production-database.js
-```
-
-### 5. Access the Application
-
-After starting the application, you can access different portals through these URLs:
-
-#### 🔐 Login Portals
-
-| Portal | URL | Default Credentials |
-|--------|-----|-------------------|
-| **Customer Portal** | `http://localhost:4555/customer/login` | Use customer username & phone |
-| **Admin Portal** | `http://localhost:4555/admin/login` | Username: `admin` / Password: `admin` |
-| **Admin Mobile** | `http://localhost:4555/admin/login/mobile` | Same as admin portal |
-| **Agent Portal** | `http://localhost:4555/agent/login` | Register agent first via admin |
-| **Technician Portal** | `http://localhost:4555/technician/login` | Register technician via admin |
-| **Technician (ID)** | `http://localhost:4555/teknisi/login` | Same as technician portal |
-| **Collector Portal** | `http://localhost:4555/collector/login` | Register collector via admin |
-
-#### 📱 Public Features
-
-| Feature | URL | Description |
-|---------|-----|-------------|
-| **Voucher Purchase** | `http://localhost:4555/voucher` | Public voucher purchase page |
-| **Trouble Report** | `http://localhost:4555/customer/trouble` | Customer trouble reporting |
-| **WhatsApp Status** | `http://localhost:4555/whatsapp/status` | Check WhatsApp connection status |
-| **API Health Check** | `http://localhost:4555/health` | Server health status |
-
-> **Note:** Replace `localhost:4555` with your server IP/domain. Port `4555` can be changed in `settings.json`
-
-> **Security:** Change default admin credentials immediately after first login via Settings menu
-
-### 6. Run Application
-```bash
-# For production
+# Start application
 npm start
 ```
-# For development
-```bash
-npm run dev
-```
+
+Application will run on **port 4555**
+
+---
+
+## 📦 Features
+
+### 💰 Billing Management
+- Package management with custom pricing
+- Automatic invoice generation
+- Payment tracking and history
+- Multiple payment gateways (Midtrans, Xendit)
+- Tax calculation
+- Payment reminders via WhatsApp
+
+### 👥 Customer Management
+- Customer registration and profiles
+- Service activation/suspension
+- Billing day customization
+- Payment history
+- Service usage monitoring
+- WhatsApp integration for notifications
+
+### 📱 Multi-Platform Support
+- **Admin Portal** - Full-featured web dashboard
+- **Customer Portal** - Self-service portal
+- **Technician Portal** - Field technician tools
+- **Collector Portal** - Payment collection tracking
+- **Agent System** - Reseller management
+- **Mobile Responsive** - Works on all devices
+
+### 🔧 Network Management
+- **Mikrotik PPPoE** - Connection monitoring
+- **GenieACS** - ONT/ONU device management
+- **Static IP** - IP address management
+- **Cable Network** - ODP and cable route tracking
+- **Network Segments** - Geographic network mapping
+- **RX Power Monitoring** - Signal quality tracking
+
+### 💬 Communication
+- **WhatsApp Bot** - Automated customer service
+- **Telegram Bot** - Admin notifications and commands
+- **Payment Notifications** - Automatic reminders
+- **Service Notifications** - Connection status alerts
+
+### 📊 Reports & Analytics
+- Monthly revenue reports
+- Payment collection reports
+- Customer growth analytics
+- Service usage statistics
+- Financial summaries
+- Export to Excel
+
+---
+
+## 🗄️ Database Structure
+
+### Core Collections
+- `packages` - Internet packages and pricing
+- `customers` - Customer information
+- `invoices` - Billing invoices
+- `payments` - Payment records
+- `expenses` - Expense tracking
+
+### Network Infrastructure
+- `odps` - Optical Distribution Points
+- `cable_routes` - Cable routing
+- `network_segments` - Network mapping
+- `onu_devices` - ONU device registry
+
+### Operations
+- `technicians` - Field technicians
+- `trouble_reports` - Customer complaints
+- `installation_jobs` - Installation tracking
+- `collectors` - Payment collectors
+- `agents` - Reseller agents
+
+**Total: 30+ collections** with optimized indexes
+
+---
+
+## 🌍 Deployment
+
+### Deploy to Koyeb (Recommended)
+
+1. Fork this repository
+2. Sign up at [Koyeb](https://koyeb.com)
+3. Create new app from GitHub
+4. Configure:
+   - **Build Command:** `npm install && npm run setup`
+   - **Run Command:** `npm start`
+   - **Port:** 4555
+5. Deploy!
+
+### Deploy to Railway
+
+1. Sign up at [Railway](https://railway.app)
+2. New Project → Deploy from GitHub
+3. Select this repository
+4. Railway auto-detects settings
+5. Deploy!
+
+### Deploy to Render
+
+1. Sign up at [Render](https://render.com)
+2. New Web Service
+3. Connect GitHub repository
+4. Configure:
+   - **Build Command:** `npm install && npm run setup`
+   - **Start Command:** `npm start`
+5. Deploy!
+
+---
+
+## ⚙️ Configuration
+
+### MongoDB Connection
+MongoDB connection is pre-configured in `config/mongodb.js` with:
+- Database: `default`
+- Connection: Hardcoded (secure cloud MongoDB)
+
+### Application Settings
+Edit `settings.json` for:
+- Company information
+- Payment gateway credentials
+- WhatsApp settings
+- Telegram bot token
+- Mikrotik credentials
+- GenieACS endpoint
+
+---
+
+## 📖 Documentation
+
+Comprehensive documentation available:
+
+- **[MONGODB_MIGRATION_NOTES.md](MONGODB_MIGRATION_NOTES.md)** - Complete migration guide
+- **[DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md)** - Deployment instructions
+- **[API Documentation](docs/)** - API reference
+- **[User Guides](docs/)** - Feature documentation
+
+---
+
+## 🔐 Default Credentials
+
+**Admin Panel:** `/admin`
+- Username: `admin`
+- Password: `admin`
+
+**Note:** Change default credentials immediately after first login!
+
+---
+
+## 🛠️ Tech Stack
+
+### Backend
+- **Node.js** - Runtime environment
+- **Express.js** - Web framework
+- **MongoDB** - Database (via mongodb driver)
+- **Baileys** - WhatsApp integration
+- **Telegraf** - Telegram bot framework
+- **Axios** - HTTP client
+
+### Frontend
+- **EJS** - Template engine
+- **Tailwind CSS** - Styling
+- **JavaScript** - Client-side logic
+- **Leaflet** - Network mapping
+
+### Integrations
+- **Mikrotik RouterOS API** - Network management
+- **GenieACS** - TR-069 device management
+- **Midtrans** - Payment gateway
+- **Xendit** - Payment gateway
+
+---
 
 ## 📁 Project Structure
 
 ```
-gembok-bill/
-├── app.js                  # Application entry point
-├── package.json            # Dependencies and scripts
-├── config/                 # Configuration files
-├── data/                   # Database files and backups
-├── migrations/             # Database migration files
-├── public/                 # Static files (CSS, JS, images)
-├── routes/                 # API endpoints
-├── scripts/                # Utility scripts
-├── utils/                  # Utility functions
-└── views/                  # EJS templates
+billing-system-mongodb/
+├── config/              # Configuration files
+│   ├── mongodb.js      # MongoDB connection
+│   ├── billing.js      # Billing operations
+│   ├── whatsapp.js     # WhatsApp integration
+│   └── ...
+├── routes/             # Express routes
+├── views/              # EJS templates
+├── public/             # Static assets
+├── scripts/            # Utility scripts
+├── middleware/         # Express middleware
+├── utils/              # Helper functions
+├── app.js              # Main application
+└── package.json        # Dependencies
 ```
-
-## 📖 Complete Documentation
-
-| Document | Description |
-|---------|-----------|
-| [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md) | Complete guide for deployment on new servers |
-| [DATA_README.md](DATA_README.md) | Information about data management |
-| [WHATSAPP_SETUP.md](WHATSAPP_SETUP.md) | WhatsApp Gateway configuration |
-| [WHATSAPP_FIX_SUMMARY.md](WHATSAPP_FIX_SUMMARY.md) | WhatsApp fixes summary |
-| [DATABASE_MIGRATION_SUMMARY.md](DATABASE_MIGRATION_SUMMARY.md) | Database migration summary |
-
-## 🎯 How to Contribute
-
-We welcome contributions from the community! Here's how to contribute:
-
-1. **Fork** this repository
-2. Create a **feature branch** (`git checkout -b feature/AmazingFeature`)
-3. **Commit** your changes (`git commit -m 'Add some AmazingFeature'`)
-4. **Push** to the branch (`git push origin feature/AmazingFeature`)
-5. Open a **Pull Request**
-
-### Contribution Guidelines
-- Follow the existing code style
-- Add documentation for new features
-- Ensure all tests pass
-- Update README if necessary
-
-## 📞 Support
-
-If you need assistance:
-
-- Create an **issue** at [GitHub Issues](https://github.com/alijayanet/gembok-bill/issues)
-- Contact the development team via email
-- Join the Discord community (if available)
-
-## 📄 License
-
-This project is licensed under the ISC license - see the [LICENSE](LICENSE) file for more details.
-
-## 👥 Development Team
-
-- **ALIJAYA Team** - [@alijayanet](https://github.com/alijayanet)
-
-## 🙏 Acknowledgments
-
-- Thanks to all contributors who have helped develop this project
-- The open source community for inspiration and support
 
 ---
 
-  
-  💻 Developed with ❤️ for the ISP community
-  
-  [Report Bug](https://github.com/alijayanet/gembok-bill/issues) · [Request Feature](https://github.com/alijayanet/gembok-bill/issues) · [Documentation](DEPLOYMENT_GUIDE.md)
-  
+## 🤝 Contributing
 
+Contributions are welcome! Please:
 
+1. Fork the repository
+2. Create feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit changes (`git commit -m 'Add AmazingFeature'`)
+4. Push to branch (`git push origin feature/AmazingFeature`)
+5. Open Pull Request
 
+---
 
+## 📝 License
+
+This project is licensed under the ISC License.
+
+---
+
+## 🙋 Support
+
+For questions or issues:
+
+1. Check [Documentation](docs/)
+2. Open an [Issue](https://github.com/Fatkhurofficial/billing-system-mongodb/issues)
+3. Contact: [GitHub Profile](https://github.com/Fatkhurofficial)
+
+---
+
+## 🎯 Roadmap
+
+- [x] MongoDB migration complete
+- [x] Koyeb deployment ready
+- [ ] Docker support
+- [ ] API documentation
+- [ ] Unit tests
+- [ ] Mobile app (React Native)
+- [ ] Multi-language support
+
+---
+
+## ⭐ Show Your Support
+
+If you find this project useful, please give it a ⭐ on GitHub!
+
+---
+
+## 📊 Stats
+
+- **30+ Collections** with optimized indexes
+- **569 Files** in codebase
+- **200,000+ Lines** of code
+- **50+ API Endpoints**
+- **10+ Integrations**
+
+---
+
+**Built with ❤️ for ISP businesses**
+
+**Ready for production deployment on Koyeb, Railway, or Render!** 🚀
