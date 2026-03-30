@@ -211,39 +211,51 @@ class BillingManager {
 
     async createIndexes() {
         const db = this.db || getDB();
+        
+        // Helper to create index safely
+        const createIndexSafe = async (collection, indexSpec, options = {}) => {
+            try {
+                await db.collection(collection).createIndex(indexSpec, options);
+            } catch (err) {
+                if (err.code !== 86) { // 86 = IndexAlreadyExists
+                    console.error(`Error creating index on ${collection}:`, err.message);
+                }
+                // Ignore if index already exists
+            }
+        };
 
         // Indexes untuk customers
-        await db.collection('customers').createIndex({ username: 1 }, { unique: true });
-        await db.collection('customers').createIndex({ phone: 1 }, { unique: true });
-        await db.collection('customers').createIndex({ pppoe_username: 1 });
-        await db.collection('customers').createIndex({ whatsapp_lid: 1 });
-        await db.collection('customers').createIndex({ package_id: 1 });
-        await db.collection('customers').createIndex({ odp_id: 1 });
+        await createIndexSafe('customers', { username: 1 }, { unique: true });
+        await createIndexSafe('customers', { phone: 1 }, { unique: true });
+        await createIndexSafe('customers', { pppoe_username: 1 });
+        await createIndexSafe('customers', { whatsapp_lid: 1 });
+        await createIndexSafe('customers', { package_id: 1 });
+        await createIndexSafe('customers', { odp_id: 1 });
 
         // Indexes untuk invoices
-        await db.collection('invoices').createIndex({ invoice_number: 1 }, { unique: true });
-        await db.collection('invoices').createIndex({ customer_id: 1 });
-        await db.collection('invoices').createIndex({ status: 1 });
-        await db.collection('invoices').createIndex({ due_date: 1 });
+        await createIndexSafe('invoices', { invoice_number: 1 }, { unique: true });
+        await createIndexSafe('invoices', { customer_id: 1 });
+        await createIndexSafe('invoices', { status: 1 });
+        await createIndexSafe('invoices', { due_date: 1 });
 
         // Indexes untuk packages
-        await db.collection('packages').createIndex({ name: 1 });
-        await db.collection('packages').createIndex({ is_active: 1 });
+        await createIndexSafe('packages', { name: 1 });
+        await createIndexSafe('packages', { is_active: 1 });
 
         // Indexes untuk ODPs
-        await db.collection('odps').createIndex({ code: 1 }, { unique: true });
-        await db.collection('odps').createIndex({ name: 1 }, { unique: true });
-        await db.collection('odps').createIndex({ latitude: 1, longitude: 1 });
-        await db.collection('odps').createIndex({ status: 1 });
+        await createIndexSafe('odps', { code: 1 }, { unique: true });
+        await createIndexSafe('odps', { name: 1 }, { unique: true });
+        await createIndexSafe('odps', { latitude: 1, longitude: 1 });
+        await createIndexSafe('odps', { status: 1 });
 
         // Indexes untuk cable_routes
-        await db.collection('cable_routes').createIndex({ customer_id: 1 });
-        await db.collection('cable_routes').createIndex({ odp_id: 1 });
-        await db.collection('cable_routes').createIndex({ status: 1 });
+        await createIndexSafe('cable_routes', { customer_id: 1 });
+        await createIndexSafe('cable_routes', { odp_id: 1 });
+        await createIndexSafe('cable_routes', { status: 1 });
 
         // Indexes untuk payments
-        await db.collection('payments').createIndex({ invoice_id: 1 });
-        await db.collection('payments').createIndex({ payment_date: 1 });
+        await createIndexSafe('payments', { invoice_id: 1 });
+        await createIndexSafe('payments', { payment_date: 1 });
 
         console.log('✅ Database indexes created');
     }
