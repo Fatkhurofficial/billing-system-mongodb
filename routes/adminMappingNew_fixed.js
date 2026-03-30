@@ -55,8 +55,8 @@ function getDeviceStatus(lastInform) {
 // Helper function untuk mendapatkan koordinat dari customer
 async function getCustomerCoordinates(customerId) {
     return new Promise((resolve, reject) => {
-        const dbPath = path.join(__dirname, '../data/billing.db');
-        const db = new sqlite3.Database(dbPath);
+        // const dbPath = path.join(...); // Removed - using MongoDB
+        // // const db = new sqlite3.Database(dbPath);
         
         db.get(`
             SELECT latitude, longitude, name, phone, pppoe_username, address, package_name, status
@@ -126,8 +126,8 @@ router.get('/api/mapping/new', adminAuth, async (req, res) => {
     try {
         console.log('🚀 New Mapping API - Loading network data...');
         
-        const dbPath = path.join(__dirname, '../data/billing.db');
-        const db = new sqlite3.Database(dbPath);
+        // const dbPath = path.join(...); // Removed - using MongoDB
+        // // const db = new sqlite3.Database(dbPath);
         
         // Load semua data secara paralel
         const [

@@ -15,8 +15,8 @@ const { adminAuth } = require('./adminAuth');
 // List collectors
 router.get('/', adminAuth, async (req, res) => {
     try {
-        const dbPath = path.join(__dirname, '../data/billing.db');
-        const db = new sqlite3.Database(dbPath);
+        // const dbPath = path.join...; // Removed - using MongoDB');
+        // // const db = // new sqlite3.Database(dbPath);
         
         // Get collectors with statistics
         const collectors = await new Promise((resolve, reject) => {
@@ -83,8 +83,8 @@ router.get('/add', adminAuth, async (req, res) => {
 router.get('/:id/edit', adminAuth, async (req, res) => {
     try {
         const { id } = req.params;
-        const dbPath = path.join(__dirname, '../data/billing.db');
-        const db = new sqlite3.Database(dbPath);
+        // const dbPath = path.join...; // Removed - using MongoDB');
+        // // const db = // new sqlite3.Database(dbPath);
         
         const collector = await new Promise((resolve, reject) => {
             db.get('SELECT * FROM collectors WHERE id = ?', [id], (err, row) => {
@@ -141,8 +141,8 @@ router.post('/', adminAuth, async (req, res) => {
             });
         }
         
-        const dbPath = path.join(__dirname, '../data/billing.db');
-        const db = new sqlite3.Database(dbPath);
+        // const dbPath = path.join...; // Removed - using MongoDB');
+        // // const db = // new sqlite3.Database(dbPath);
         
         // Check if phone already exists
         const existingCollector = await new Promise((resolve, reject) => {
@@ -211,8 +211,8 @@ router.put('/:id', adminAuth, async (req, res) => {
             });
         }
         
-        const dbPath = path.join(__dirname, '../data/billing.db');
-        const db = new sqlite3.Database(dbPath);
+        // const dbPath = path.join...; // Removed - using MongoDB');
+        // // const db = // new sqlite3.Database(dbPath);
         
         // Check if phone already exists (excluding current collector)
         const existingCollector = await new Promise((resolve, reject) => {
@@ -280,8 +280,8 @@ router.put('/:id', adminAuth, async (req, res) => {
 router.delete('/:id', adminAuth, async (req, res) => {
     try {
         const { id } = req.params;
-        const dbPath = path.join(__dirname, '../data/billing.db');
-        const db = new sqlite3.Database(dbPath);
+        // const dbPath = path.join...; // Removed - using MongoDB');
+        // // const db = // new sqlite3.Database(dbPath);
         
         // Check if collector has payments
         const paymentCount = await new Promise((resolve, reject) => {

@@ -7,7 +7,7 @@ const { getSetting } = require('./settingsManager');
 class WhatsAppMessageHandler {
     constructor() {
         this.dbPath = path.join(__dirname, '../data/billing.db');
-        this.db = new sqlite3.Database(this.dbPath);
+        // // this.db = new sqlite3.Database(this.dbPath);
         
         // Define response patterns for technician messages
         this.responsePatterns = {

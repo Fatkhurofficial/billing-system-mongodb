@@ -325,7 +325,7 @@ Contoh: tolakrequest 1 Data tidak lengkap`);
     async handleAgentStats(remoteJid) {
         try {
             // const sqlite3 = // require('sqlite3'); // Removed - using MongoDB
-            const db = new sqlite3.Database('./data/billing.db');
+            // // const db = new sqlite3.Database('./data/billing.db');
             
             const stats = {};
             
@@ -470,7 +470,7 @@ Contoh: tolakrequest 1 Data tidak lengkap`);
     async handleRejectAgentRequest(remoteJid, requestId, reason) {
         try {
             // const sqlite3 = // require('sqlite3'); // Removed - using MongoDB
-            const db = new sqlite3.Database('./data/billing.db');
+            // // const db = new sqlite3.Database('./data/billing.db');
             
             const updateSql = `
                 UPDATE agent_balance_requests 
@@ -493,7 +493,7 @@ Contoh: tolakrequest 1 Data tidak lengkap`);
                     
                     // Get request details for notification
                     const request = await new Promise((resolve, reject) => {
-                        const db2 = new sqlite3.Database('./data/billing.db');
+                        // // const db2 = new sqlite3.Database('./data/billing.db');
                         db2.get(`
                             SELECT abr.*, a.name as agent_name, a.phone as agent_phone
                             FROM agent_balance_requests abr

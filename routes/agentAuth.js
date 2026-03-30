@@ -385,7 +385,7 @@ router.post('/profile', requireAgentAuth, async (req, res) => {
         
         // Update agent profile
         // const sqlite3 = // require('sqlite3'); // Removed - using MongoDB
-        const db = new sqlite3.Database('./data/billing.db');
+        // // const db = new sqlite3.Database('./data/billing.db');
         
         const updateSql = `
             UPDATE agents 
@@ -433,7 +433,7 @@ router.post('/change-password', requireAgentAuth, async (req, res) => {
         // Verify current password
         const agent = await agentManager.getAgentById(agentId);
         // const sqlite3 = // require('sqlite3'); // Removed - using MongoDB
-        const db = new sqlite3.Database('./data/billing.db');
+        // // const db = new sqlite3.Database('./data/billing.db');
         
         const getPasswordSql = 'SELECT password FROM agents WHERE id = ?';
         db.get(getPasswordSql, [agentId], async (err, row) => {

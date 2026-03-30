@@ -8,8 +8,8 @@ const { getVersionInfo, getVersionBadge } = require('../config/version-utils');
 const logger = require('../config/logger');
 
 // Database connection
-const dbPath = path.join(__dirname, '../data/billing.db');
-const db = new sqlite3.Database(dbPath);
+// const dbPath = path.join...; // Removed - using MongoDB');
+// // const db = // new sqlite3.Database(dbPath);
 
 // Simple OTP store (following customer portal pattern)
 const otpStore = {};

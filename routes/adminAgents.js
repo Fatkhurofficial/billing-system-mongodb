@@ -420,7 +420,7 @@ router.post('/agents/approve-request', adminAuth, async (req, res) => {
 
                 // Get request details for notification
                 // const sqlite3 = // require('sqlite3'); // Removed - using MongoDB
-                const db = new sqlite3.Database('./data/billing.db');
+                // // const db = new sqlite3.Database('./data/billing.db');
 
                 db.get(`
                     SELECT abr.*, a.name as agent_name, a.phone as agent_phone, ab.balance as current_balance
@@ -469,7 +469,7 @@ router.post('/agents/reject-request', adminAuth, async (req, res) => {
         const { requestId, rejectReason } = req.body;
 
         // const sqlite3 = // require('sqlite3'); // Removed - using MongoDB
-        const db = new sqlite3.Database('./data/billing.db');
+        // // const db = new sqlite3.Database('./data/billing.db');
 
         const updateSql = `
             UPDATE agent_balance_requests 

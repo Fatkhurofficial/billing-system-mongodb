@@ -102,7 +102,7 @@ async function handleVoucherWebhook(body, headers) {
 
         // Cari purchase berdasarkan order_id
         // const sqlite3 = // require('sqlite3'); // Removed - using MongoDB
-        const db = new sqlite3.Database('./data/billing.db');
+        // // const db = new sqlite3.Database('./data/billing.db');
 
         let purchase;
         try {

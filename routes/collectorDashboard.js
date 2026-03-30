@@ -76,8 +76,8 @@ router.get('/dashboard', collectorAuth, async (req, res) => {
 // Payment form
 router.get('/payment', collectorAuth, async (req, res) => {
     try {
-        const dbPath = path.join(__dirname, '../data/billing.db');
-        const db = new sqlite3.Database(dbPath);
+        // const dbPath = path.join...; // Removed - using MongoDB');
+        // // const db = // new sqlite3.Database(dbPath);
 
         // Get active customers
         const customers = await new Promise((resolve, reject) => {
@@ -112,8 +112,8 @@ router.get('/payment', collectorAuth, async (req, res) => {
 router.get('/api/customer-invoices/:customerId', collectorAuth, async (req, res) => {
     try {
         const { customerId } = req.params;
-        const dbPath = path.join(__dirname, '../data/billing.db');
-        const db = new sqlite3.Database(dbPath);
+        // const dbPath = path.join...; // Removed - using MongoDB');
+        // // const db = // new sqlite3.Database(dbPath);
 
         const invoices = await new Promise((resolve, reject) => {
             db.all(`
@@ -215,8 +215,8 @@ router.get('/customers', collectorAuth, async (req, res) => {
 router.get('/profile', collectorAuth, async (req, res) => {
     try {
         const collectorId = req.collector.id;
-        const dbPath = path.join(__dirname, '../data/billing.db');
-        const db = new sqlite3.Database(dbPath);
+        // const dbPath = path.join...; // Removed - using MongoDB');
+        // // const db = // new sqlite3.Database(dbPath);
 
         // Get collector info
         const collector = await new Promise((resolve, reject) => {
@@ -297,8 +297,8 @@ router.get('/profile', collectorAuth, async (req, res) => {
 router.get('/profile/edit', collectorAuth, async (req, res) => {
     try {
         const collectorId = req.collector.id;
-        const dbPath = path.join(__dirname, '../data/billing.db');
-        const db = new sqlite3.Database(dbPath);
+        // const dbPath = path.join...; // Removed - using MongoDB');
+        // // const db = // new sqlite3.Database(dbPath);
 
         // Get collector info
         const collector = await new Promise((resolve, reject) => {
@@ -340,8 +340,8 @@ router.post('/api/profile/update', collectorAuth, async (req, res) => {
             });
         }
 
-        const dbPath = path.join(__dirname, '../data/billing.db');
-        const db = new sqlite3.Database(dbPath);
+        // const dbPath = path.join...; // Removed - using MongoDB');
+        // // const db = // new sqlite3.Database(dbPath);
 
         // Update collector info
         await new Promise((resolve, reject) => {
@@ -391,8 +391,8 @@ router.post('/api/profile/update-password', collectorAuth, async (req, res) => {
             });
         }
 
-        const dbPath = path.join(__dirname, '../data/billing.db');
-        const db = new sqlite3.Database(dbPath);
+        // const dbPath = path.join...; // Removed - using MongoDB');
+        // // const db = // new sqlite3.Database(dbPath);
 
         // Get current collector data
         const collector = await new Promise((resolve, reject) => {

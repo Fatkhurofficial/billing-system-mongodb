@@ -91,8 +91,8 @@ class WhatsAppCore {
             // const sqlite3 = // require('sqlite3'); // Removed - using MongoDB
             const path = require('path');
             
-            const dbPath = path.join(__dirname, '../data/billing.db');
-            const db = new sqlite3.Database(dbPath);
+            // const dbPath = path.join(...); // Removed - using MongoDB
+            // // const db = new sqlite3.Database(dbPath);
             
             return new Promise((resolve, reject) => {
                 const query = `

@@ -58,8 +58,8 @@ router.post('/login', async (req, res) => {
             });
         }
         
-        const dbPath = path.join(__dirname, '../data/billing.db');
-        const db = new sqlite3.Database(dbPath);
+        // const dbPath = path.join...; // Removed - using MongoDB');
+        // // const db = // new sqlite3.Database(dbPath);
         
         // Find collector by phone
         const collector = await new Promise((resolve, reject) => {

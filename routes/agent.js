@@ -225,7 +225,7 @@ router.post('/process-payment', requireAgentAuth, async (req, res) => {
         // Hapus mode partial, hanya proses pembayaran full
         // Cari invoice unpaid tertua
         // const sqlite3 = // require('sqlite3'); // Removed - using MongoDB
-        const db = new sqlite3.Database('./data/billing.db');
+        // // const db = new sqlite3.Database('./data/billing.db');
         db.get('SELECT id, status FROM invoices WHERE customer_id = ? AND status = "unpaid" ORDER BY due_date ASC, id ASC LIMIT 1', [customerId], async (err, invoice) => {
             db.close();
             if (err) {
@@ -309,7 +309,7 @@ router.post('/process-payment', requireAgentAuth, async (req, res) => {
                 };
                 // Get customer data from database
                 // const sqlite3 = // require('sqlite3'); // Removed - using MongoDB
-                const db = new sqlite3.Database('./data/billing.db');
+                // // const db = new sqlite3.Database('./data/billing.db');
                 db.get('SELECT name, phone FROM customers WHERE id = ?', [customerId], (err, customer) => {
                     db.close();
                     if (!err && customer) {
@@ -553,7 +553,7 @@ router.get('/api/search-customer', requireAgentAuth, async (req, res) => {
         const q = (req.query.q || '').trim();
         if (!q) return res.json({ success: false, customers: [] });
         // const sqlite3 = // require('sqlite3'); // Removed - using MongoDB
-        const db = new sqlite3.Database('./data/billing.db');
+        // // const db = new sqlite3.Database('./data/billing.db');
         const likeQ = `%${q}%`;
         let sql, params;
         if (/^\d+$/.test(q)) {

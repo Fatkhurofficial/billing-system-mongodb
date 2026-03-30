@@ -176,8 +176,8 @@ router.post('/api/monthly-reset', adminAuth, async (req, res) => {
 // Get monthly reset status
 router.get('/api/monthly-reset-status', adminAuth, async (req, res) => {
     try {
-        const dbPath = path.join(__dirname, '../data/billing.db');
-        const db = new sqlite3.Database(dbPath);
+        // const dbPath = path.join...; // Removed - using MongoDB');
+        // // const db = // new sqlite3.Database(dbPath);
 
         // Get last reset date
         const lastReset = await new Promise((resolve, reject) => {
@@ -223,8 +223,8 @@ router.get('/api/monthly-reset-status', adminAuth, async (req, res) => {
 router.get('/mobile/collector', getAppSettings, async (req, res) => {
     try {
         // Get collectors list for mobile
-        const dbPath = path.join(__dirname, '../data/billing.db');
-        const db = new sqlite3.Database(dbPath);
+        // const dbPath = path.join...; // Removed - using MongoDB');
+        // // const db = // new sqlite3.Database(dbPath);
 
         // Get collectors with statistics - dengan validasi data
         const collectors = await new Promise((resolve, reject) => {
@@ -298,8 +298,8 @@ router.get('/mobile/collector', getAppSettings, async (req, res) => {
 router.get('/api/customer-invoices/:customerId', adminAuth, async (req, res) => {
     try {
         const { customerId } = req.params;
-        const dbPath = path.join(__dirname, '../data/billing.db');
-        const db = new sqlite3.Database(dbPath);
+        // const dbPath = path.join...; // Removed - using MongoDB');
+        // // const db = // new sqlite3.Database(dbPath);
 
         const invoices = await new Promise((resolve, reject) => {
             db.all(`
@@ -351,8 +351,8 @@ router.post('/api/collector-payment', adminAuth, async (req, res) => {
             });
         }
 
-        const dbPath = path.join(__dirname, '../data/billing.db');
-        const db = new sqlite3.Database(dbPath);
+        // const dbPath = path.join...; // Removed - using MongoDB');
+        // // const db = // new sqlite3.Database(dbPath);
 
         // Mulai transaction untuk operasi kompleks
         await new Promise((resolve, reject) => {
@@ -488,8 +488,8 @@ router.post('/api/collector-payment', adminAuth, async (req, res) => {
 router.get('/mobile/collector/payment', getAppSettings, async (req, res) => {
     try {
         // Get collectors and customers for payment form
-        const dbPath = path.join(__dirname, '../data/billing.db');
-        const db = new sqlite3.Database(dbPath);
+        // const dbPath = path.join...; // Removed - using MongoDB');
+        // // const db = // new sqlite3.Database(dbPath);
 
         const [collectors, customers] = await Promise.all([
             new Promise((resolve, reject) => {
@@ -527,8 +527,8 @@ router.get('/mobile/collector/payment', getAppSettings, async (req, res) => {
 router.get('/collector-reports', getAppSettings, async (req, res) => {
     try {
         const { dateFrom, dateTo, collector } = req.query;
-        const dbPath = path.join(__dirname, '../data/billing.db');
-        const db = new sqlite3.Database(dbPath);
+        // const dbPath = path.join...; // Removed - using MongoDB');
+        // // const db = // new sqlite3.Database(dbPath);
 
         // Check if collectors table exists
         const tableExists = await new Promise((resolve, reject) => {
@@ -657,8 +657,8 @@ router.get('/collector-details/:id', getAppSettings, async (req, res) => {
     try {
         const { id } = req.params;
         const { dateFrom, dateTo } = req.query;
-        const dbPath = path.join(__dirname, '../data/billing.db');
-        const db = new sqlite3.Database(dbPath);
+        // const dbPath = path.join...; // Removed - using MongoDB');
+        // // const db = // new sqlite3.Database(dbPath);
 
         // Set default date range (last 30 days)
         const defaultDateTo = new Date();
@@ -933,8 +933,8 @@ router.get('/api/stats', adminAuth, async (req, res) => {
 router.get('/api/revenue/summary', adminAuth, async (req, res) => {
     try {
         const { from, to } = req.query;
-        const dbPath = path.join(__dirname, '../data/billing.db');
-        const db = new sqlite3.Database(dbPath);
+        // const dbPath = path.join...; // Removed - using MongoDB');
+        // // const db = // new sqlite3.Database(dbPath);
 
         function getDateStr(d) { return new Date(d).toISOString().split('T')[0]; }
         const todayStr = getDateStr(new Date());

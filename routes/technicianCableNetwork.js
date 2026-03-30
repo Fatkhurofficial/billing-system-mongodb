@@ -8,11 +8,11 @@ const { getSetting } = require('../config/settingsManager');
 const CableNetworkUtils = require('../utils/cableNetworkUtils');
 
 // Database path
-const dbPath = path.join(__dirname, '../data/billing.db');
+// const dbPath = path.join...; // Removed - using MongoDB');
 
 // Helper function untuk koneksi database
 function getDatabase() {
-    return new sqlite3.Database(dbPath);
+    // return // new sqlite3.Database(dbPath);
 }
 
 // ===== TECHNICIAN CABLE NETWORK API =====

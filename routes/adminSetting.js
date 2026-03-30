@@ -586,7 +586,7 @@ router.post('/backup', async (req, res) => {
     // const sqlite3 = // require('sqlite3'); // Removed - using MongoDB
 
     try {
-        const dbPath = path.join(__dirname, '../data/billing.db');
+        // const dbPath = path.join(...); // Removed - using MongoDB
         const backupPath = path.join(__dirname, '../data/backup');
 
         // Buat direktori backup jika belum ada
@@ -601,7 +601,7 @@ router.post('/backup', async (req, res) => {
         const backupShmFile = path.join(backupPath, `${backupBaseName}.db-shm`);
 
         // Open database connection
-        const db = new sqlite3.Database(dbPath);
+        // // const db = new sqlite3.Database(dbPath);
 
         try {
             // 1. WAL Checkpoint untuk memastikan data konsisten sebelum backup
@@ -702,7 +702,7 @@ router.post('/restore', async (req, res) => {
             });
         }
 
-        const dbPath = path.join(__dirname, '../data/billing.db');
+        // const dbPath = path.join(...); // Removed - using MongoDB
         const backupPath = path.join(__dirname, '../data/backup', backupFilename);
 
         // Validasi file backup exists
@@ -743,7 +743,7 @@ router.post('/restore', async (req, res) => {
         }
 
         // Buka temporary database untuk merge WAL
-        const tempDb = new sqlite3.Database(tempDbPath);
+        // // const tempDb = new sqlite3.Database(tempDbPath);
 
         try {
             // Lakukan WAL checkpoint untuk merge data dari WAL ke database utama
@@ -771,8 +771,8 @@ router.post('/restore', async (req, res) => {
             });
 
             // Buka database backup yang sudah di-merge (gunakan temporary database)
-            const backupDb = new sqlite3.Database(tempDbPath);
-            const activeDb = new sqlite3.Database(dbPath);
+            // const backupDb = new sqlite3.Database(tempDbPath);
+            // // const activeDb = new sqlite3.Database(dbPath);
 
             // Daftar tabel yang akan di-restore
             const tablesToRestore = [

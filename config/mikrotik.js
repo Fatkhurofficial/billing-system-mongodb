@@ -1838,7 +1838,7 @@ async function generateHotspotVouchers(count, prefix, profile, server, validUnti
 async function getVoucherGenerationSettings() {
     try {
         // const sqlite3 = // require('sqlite3'); // Removed - using MongoDB
-        const db = new sqlite3.Database('./data/billing.db');
+        // // const db = new sqlite3.Database('./data/billing.db');
 
         return new Promise((resolve, reject) => {
             db.all("SELECT setting_key, setting_value FROM voucher_generation_settings", (err, rows) => {

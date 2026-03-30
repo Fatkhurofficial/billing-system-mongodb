@@ -182,8 +182,8 @@ router.get('/odp/:id', adminAuth, async (req, res) => {
             });
         }
         
-        const dbPath = path.join(__dirname, '../data/billing.db');
-        const db = new sqlite3.Database(dbPath);
+        // const dbPath = path.join(...); // Removed - using MongoDB
+        // // const db = new sqlite3.Database(dbPath);
         
         // Get ODP details dengan informasi tambahan
         const odp = await new Promise((resolve, reject) => {
@@ -244,8 +244,8 @@ router.post('/update-odp', adminAuth, async (req, res) => {
             });
         }
         
-        const dbPath = path.join(__dirname, '../data/billing.db');
-        const db = new sqlite3.Database(dbPath);
+        // const dbPath = path.join(...); // Removed - using MongoDB
+        // // const db = new sqlite3.Database(dbPath);
         
         // Check if ODP exists in database
         const existingODP = await new Promise((resolve, reject) => {
@@ -405,8 +405,8 @@ router.post('/update-onu', adminAuth, async (req, res) => {
             });
         }
         
-        const dbPath = path.join(__dirname, '../data/billing.db');
-        const db = new sqlite3.Database(dbPath);
+        // const dbPath = path.join(...); // Removed - using MongoDB
+        // // const db = new sqlite3.Database(dbPath);
         
         // Check if ONU device exists in database
         const existingDevice = await new Promise((resolve, reject) => {
@@ -520,8 +520,8 @@ router.post('/update-customer', adminAuth, async (req, res) => {
             });
         }
         
-        const dbPath = path.join(__dirname, '../data/billing.db');
-        const db = new sqlite3.Database(dbPath);
+        // const dbPath = path.join(...); // Removed - using MongoDB
+        // // const db = new sqlite3.Database(dbPath);
         
         // Check if Customer exists in database
         const existingCustomer = await new Promise((resolve, reject) => {
@@ -694,8 +694,8 @@ router.post('/restart-onu', adminAuth, async (req, res) => {
         
         // Log the restart action to database (optional)
         try {
-            const dbPath = path.join(__dirname, '../data/billing.db');
-            const db = new sqlite3.Database(dbPath);
+            // const dbPath = path.join(...); // Removed - using MongoDB
+            // // const db = new sqlite3.Database(dbPath);
             
             await new Promise((resolve, reject) => {
                 db.run(`
@@ -771,8 +771,8 @@ router.get('/api/mapping/new', adminAuth, async (req, res) => {
     try {
         console.log('🚀 New Mapping API - Loading network data...');
         
-        const dbPath = path.join(__dirname, '../data/billing.db');
-        const db = new sqlite3.Database(dbPath);
+        // const dbPath = path.join(...); // Removed - using MongoDB
+        // // const db = new sqlite3.Database(dbPath);
         
         // Load data dasar terlebih dahulu (customers, odps, cables, backbone)
         console.log('🔍 Loading basic data from database...');

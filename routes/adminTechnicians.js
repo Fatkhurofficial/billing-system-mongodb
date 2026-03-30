@@ -8,8 +8,8 @@ const { adminAuth } = require('./adminAuth');
 const logger = require('../config/logger');
 
 // Database connection
-const dbPath = path.join(__dirname, '../data/billing.db');
-const db = new sqlite3.Database(dbPath);
+// const dbPath = path.join...; // Removed - using MongoDB');
+// // const db = // new sqlite3.Database(dbPath);
 
 /**
  * GET /admin/technicians - Halaman manajemen teknisi

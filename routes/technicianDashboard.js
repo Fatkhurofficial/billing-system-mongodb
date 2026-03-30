@@ -8,8 +8,8 @@ const { getVersionInfo, getVersionBadge } = require('../config/version-utils');
 const logger = require('../config/logger');
 
 // Database connection
-const dbPath = path.join(__dirname, '../data/billing.db');
-const db = new sqlite3.Database(dbPath);
+// const dbPath = path.join...; // Removed - using MongoDB');
+// // const db = // new sqlite3.Database(dbPath);
 
 // Billing manager untuk akses data
 const billingManager = require('../config/billing');
@@ -968,7 +968,7 @@ router.get('/api/mapping/devices', technicianAuth, async (req, res) => {
         // Ambil data ODP connections untuk backbone visualization
         let odpConnections = [];
         try {
-            const db = new sqlite3.Database(dbPath);
+            // // const db = // new sqlite3.Database(dbPath);
             odpConnections = await new Promise((resolve, reject) => {
                 db.all(`
                     SELECT oc.*, 
@@ -2128,8 +2128,8 @@ router.get('/api/mapping-data', technicianAuth, async (req, res) => {
     try {
         // Fix database connection issue
         // const sqlite3 = // require('sqlite3'); // Removed - using MongoDB
-        const dbPath = path.join(__dirname, '../data/billing.db');
-        const db = new sqlite3.Database(dbPath);
+        // const dbPath = path.join...; // Removed - using MongoDB');
+        // // const db = // new sqlite3.Database(dbPath);
 
         // Get ODPs data from database
         const odps = await new Promise((resolve, reject) => {
@@ -2286,8 +2286,8 @@ router.get('/api/test-mapping-data', async (req, res) => {
     try {
         // Fix database connection issue
         // const sqlite3 = // require('sqlite3'); // Removed - using MongoDB
-        const dbPath = path.join(__dirname, '../data/billing.db');
-        const db = new sqlite3.Database(dbPath);
+        // const dbPath = path.join...; // Removed - using MongoDB');
+        // // const db = // new sqlite3.Database(dbPath);
 
         // Get ODPs data from database
         const odps = await new Promise((resolve, reject) => {

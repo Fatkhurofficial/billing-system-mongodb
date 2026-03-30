@@ -521,7 +521,7 @@ router.get('/api/mapping/devices', adminAuth, async (req, res) => {
     const billingManager = require('../config/billing');
     // const sqlite3 = // require('sqlite3'); // Removed - using MongoDB
     const path = require('path');
-    const dbPath = path.join(__dirname, '../data/billing.db');
+    // const dbPath = path.join(...); // Removed - using MongoDB
     const { pppoe, phone } = req.query;
     
     console.log('🔍 Starting mapping devices API with database integration...');
@@ -770,7 +770,7 @@ router.get('/api/mapping/devices', adminAuth, async (req, res) => {
     
     try {
       console.log('🔍 Fetching complete mapping data from database...');
-      const db = new sqlite3.Database(dbPath);
+      // // const db = new sqlite3.Database(dbPath);
       
       // Ambil data ODP
       odps = await new Promise((resolve, reject) => {
@@ -846,7 +846,7 @@ router.get('/api/mapping/devices', adminAuth, async (req, res) => {
 
     // Ambil data customers untuk response lengkap
     const customers = await new Promise((resolve, reject) => {
-      const customerDb = new sqlite3.Database(dbPath);
+      // // const customerDb = new sqlite3.Database(dbPath);
       customerDb.all(`
         SELECT id, name, phone, pppoe_username, latitude, longitude, status, 
                address, package_name, created_at

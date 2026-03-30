@@ -104,8 +104,8 @@ router.get('/api/mapping/new', adminAuth, async (req, res) => {
     try {
         console.log('🚀 New Mapping API - Loading network data...');
         
-        const dbPath = path.join(__dirname, '../data/billing.db');
-        const db = new sqlite3.Database(dbPath);
+        // const dbPath = path.join(...); // Removed - using MongoDB
+        // // const db = new sqlite3.Database(dbPath);
         
         // Load data dasar terlebih dahulu (customers, odps, cables, backbone)
         console.log('🔍 Loading basic data from database...');

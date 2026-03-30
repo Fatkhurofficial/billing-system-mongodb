@@ -6,7 +6,7 @@ const { getVersionInfo, getVersionBadge } = require('../config/version-utils');
 
 // Get pricing list
 router.get('/api/list', (req, res) => {
-    const db = new sqlite3.Database('./data/billing.db');
+    // // const db = // new sqlite3.Database('./data/billing.db');
     
     const sql = 'SELECT * FROM voucher_pricing ORDER BY customer_price ASC';
     db.all(sql, [], (err, rows) => {
@@ -46,7 +46,7 @@ router.get('/api/hotspot-profiles', async (req, res) => {
 
 // Get single pricing
 router.get('/api/get/:id', (req, res) => {
-    const db = new sqlite3.Database('./data/billing.db');
+    // // const db = // new sqlite3.Database('./data/billing.db');
     const id = req.params.id;
     
     const sql = 'SELECT * FROM voucher_pricing WHERE id = ?';
@@ -69,7 +69,7 @@ router.get('/api/get/:id', (req, res) => {
 
 // Create new pricing
 router.post('/api/create', (req, res) => {
-    const db = new sqlite3.Database('./data/billing.db');
+    // // const db = // new sqlite3.Database('./data/billing.db');
     const { packageName, customerPrice, agentPrice, duration, durationType, accountType, hotspotProfile, description, isActive, voucherDigitType, voucherLength } = req.body;
     
     // Calculate commission automatically (for backward compatibility)
@@ -108,7 +108,7 @@ router.post('/api/create', (req, res) => {
 
 // Update pricing
 router.put('/api/update/:id', (req, res) => {
-    const db = new sqlite3.Database('./data/billing.db');
+    // // const db = // new sqlite3.Database('./data/billing.db');
     const id = req.params.id;
     const { packageName, customerPrice, agentPrice, duration, durationType, accountType, hotspotProfile, description, isActive, voucherDigitType, voucherLength } = req.body;
     
@@ -151,7 +151,7 @@ router.put('/api/update/:id', (req, res) => {
 
 // Delete pricing
 router.delete('/api/delete/:id', (req, res) => {
-    const db = new sqlite3.Database('./data/billing.db');
+    // // const db = // new sqlite3.Database('./data/billing.db');
     const id = req.params.id;
     
     const sql = 'DELETE FROM voucher_pricing WHERE id = ?';
