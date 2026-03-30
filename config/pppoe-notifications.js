@@ -119,7 +119,7 @@ function getAdminNumbers() {
 // Get technician numbers from settings.json
 async function getTechnicianNumbers() {
     try {
-        const sqlite3 = require('sqlite3').verbose();
+        // const sqlite3 = // require('sqlite3'); // Removed - using MongoDB
         const path = require('path');
         
         const dbPath = path.join(__dirname, '../data/billing.db');

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const sqlite3 = require('sqlite3').verbose();
+// const sqlite3 = // require('sqlite3'); // Removed - using MongoDB
 const path = require('path');
 const { getSetting } = require('../config/settingsManager');
 const { technicianAuth, authManager } = require('./technicianAuth');
@@ -2127,7 +2127,7 @@ router.get('/mobile/mapping', technicianAuth, async (req, res) => {
 router.get('/api/mapping-data', technicianAuth, async (req, res) => {
     try {
         // Fix database connection issue
-        const sqlite3 = require('sqlite3').verbose();
+        // const sqlite3 = // require('sqlite3'); // Removed - using MongoDB
         const dbPath = path.join(__dirname, '../data/billing.db');
         const db = new sqlite3.Database(dbPath);
 
@@ -2285,7 +2285,7 @@ router.get('/api/mapping-data', technicianAuth, async (req, res) => {
 router.get('/api/test-mapping-data', async (req, res) => {
     try {
         // Fix database connection issue
-        const sqlite3 = require('sqlite3').verbose();
+        // const sqlite3 = // require('sqlite3'); // Removed - using MongoDB
         const dbPath = path.join(__dirname, '../data/billing.db');
         const db = new sqlite3.Database(dbPath);
 

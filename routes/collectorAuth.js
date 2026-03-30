@@ -5,7 +5,7 @@
 
 const express = require('express');
 const router = express.Router();
-const sqlite3 = require('sqlite3').verbose();
+// const sqlite3 = // require('sqlite3'); // Removed - using MongoDB
 const path = require('path');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');

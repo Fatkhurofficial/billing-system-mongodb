@@ -1837,7 +1837,7 @@ async function generateHotspotVouchers(count, prefix, profile, server, validUnti
 // Fungsi untuk mengambil pengaturan generate voucher dari database
 async function getVoucherGenerationSettings() {
     try {
-        const sqlite3 = require('sqlite3').verbose();
+        // const sqlite3 = // require('sqlite3'); // Removed - using MongoDB
         const db = new sqlite3.Database('./data/billing.db');
 
         return new Promise((resolve, reject) => {

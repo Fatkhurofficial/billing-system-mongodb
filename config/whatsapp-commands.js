@@ -328,7 +328,7 @@ class WhatsAppCommands {
             const technicianGroupId = getSetting('technician_group_id', '');
             
             // Get technician data from database
-            const sqlite3 = require('sqlite3').verbose();
+            // const sqlite3 = // require('sqlite3'); // Removed - using MongoDB
             const path = require('path');
             
             const dbPath = path.join(__dirname, '../data/billing.db');

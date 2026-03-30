@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const sqlite3 = require('sqlite3').verbose();
+// const sqlite3 = // require('sqlite3'); // Removed - using MongoDB
 const MikrotikAPI = require('../config/mikrotik');
 const { getVersionInfo, getVersionBadge } = require('../config/version-utils');
 

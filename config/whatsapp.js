@@ -835,7 +835,7 @@ async function getDeviceByNumber(number) {
 
             // Cari pelanggan berdasarkan nomor telepon (coba semua format)
             const customer = await new Promise((resolve, reject) => {
-                const db = require('sqlite3').verbose();
+                // const db = // require('sqlite3'); // Removed - using MongoDB
                 const database = new db.Database('./data/billing.db');
 
                 // Debug: Tampilkan parameter pencarian

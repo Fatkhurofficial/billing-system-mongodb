@@ -583,7 +583,7 @@ router.post('/wa-delete', async (req, res) => {
 
 // Backup database - Create 3 files: .db, .db-wal, .db-shm
 router.post('/backup', async (req, res) => {
-    const sqlite3 = require('sqlite3').verbose();
+    // const sqlite3 = // require('sqlite3'); // Removed - using MongoDB
 
     try {
         const dbPath = path.join(__dirname, '../data/billing.db');
@@ -690,7 +690,7 @@ router.post('/backup', async (req, res) => {
 
 // Restore database - Restore hanya data pelanggan, paket billing, dan ODP management
 router.post('/restore', async (req, res) => {
-    const sqlite3 = require('sqlite3').verbose();
+    // const sqlite3 = // require('sqlite3'); // Removed - using MongoDB
 
     try {
         const { backup_file: backupFilename } = req.body;

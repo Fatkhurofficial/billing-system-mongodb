@@ -174,7 +174,7 @@ async function sendGroupMessage(numbers, message) {
 async function sendTechnicianMessage(message, priority = 'normal') {
     try {
         // Ambil daftar teknisi dari database dengan whatsapp_group_id
-        const sqlite3 = require('sqlite3').verbose();
+        // const sqlite3 = // require('sqlite3'); // Removed - using MongoDB
         const path = require('path');
 
         const dbPath = path.join(__dirname, '../data/billing.db');

@@ -419,7 +419,7 @@ router.post('/agents/approve-request', adminAuth, async (req, res) => {
                 const whatsappManager = new AgentWhatsAppManager();
 
                 // Get request details for notification
-                const sqlite3 = require('sqlite3').verbose();
+                // const sqlite3 = // require('sqlite3'); // Removed - using MongoDB
                 const db = new sqlite3.Database('./data/billing.db');
 
                 db.get(`
@@ -468,7 +468,7 @@ router.post('/agents/reject-request', adminAuth, async (req, res) => {
     try {
         const { requestId, rejectReason } = req.body;
 
-        const sqlite3 = require('sqlite3').verbose();
+        // const sqlite3 = // require('sqlite3'); // Removed - using MongoDB
         const db = new sqlite3.Database('./data/billing.db');
 
         const updateSql = `

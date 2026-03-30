@@ -519,7 +519,7 @@ router.get('/api/statistics', adminAuth, async (req, res) => {
 router.get('/api/mapping/devices', adminAuth, async (req, res) => {
   try {
     const billingManager = require('../config/billing');
-    const sqlite3 = require('sqlite3').verbose();
+    // const sqlite3 = // require('sqlite3'); // Removed - using MongoDB
     const path = require('path');
     const dbPath = path.join(__dirname, '../data/billing.db');
     const { pppoe, phone } = req.query;

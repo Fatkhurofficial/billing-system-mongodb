@@ -324,7 +324,7 @@ Contoh: tolakrequest 1 Data tidak lengkap`);
     // Get agent statistics
     async handleAgentStats(remoteJid) {
         try {
-            const sqlite3 = require('sqlite3').verbose();
+            // const sqlite3 = // require('sqlite3'); // Removed - using MongoDB
             const db = new sqlite3.Database('./data/billing.db');
             
             const stats = {};
@@ -469,7 +469,7 @@ Contoh: tolakrequest 1 Data tidak lengkap`);
     // Reject agent request
     async handleRejectAgentRequest(remoteJid, requestId, reason) {
         try {
-            const sqlite3 = require('sqlite3').verbose();
+            // const sqlite3 = // require('sqlite3'); // Removed - using MongoDB
             const db = new sqlite3.Database('./data/billing.db');
             
             const updateSql = `

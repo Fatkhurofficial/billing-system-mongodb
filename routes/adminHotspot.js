@@ -9,7 +9,7 @@ const { getVersionInfo, getVersionBadge } = require('../config/version-utils');
 
 // Helper function untuk mengambil setting voucher online
 async function getVoucherOnlineSettings() {
-    const sqlite3 = require('sqlite3').verbose();
+    // const sqlite3 = // require('sqlite3'); // Removed - using MongoDB
     const db = new sqlite3.Database('./data/billing.db');
 
     return new Promise((resolve, reject) => {
@@ -712,7 +712,7 @@ router.post('/generate-auto-voucher', async (req, res) => {
 // POST: Reset setting voucher online ke profile pertama
 router.post('/reset-voucher-online-settings', async (req, res) => {
     try {
-        const sqlite3 = require('sqlite3').verbose();
+        // const sqlite3 = // require('sqlite3'); // Removed - using MongoDB
         const db = new sqlite3.Database('./data/billing.db');
 
         // Get first available profile from Mikrotik
@@ -767,7 +767,7 @@ router.post('/save-voucher-online-settings', async (req, res) => {
             });
         }
 
-        const sqlite3 = require('sqlite3').verbose();
+        // const sqlite3 = // require('sqlite3'); // Removed - using MongoDB
         const db = new sqlite3.Database('./data/billing.db');
 
         // Ensure voucher_online_settings table exists with duration columns
@@ -847,7 +847,7 @@ router.post('/save-voucher-generation-settings', async (req, res) => {
             });
         }
 
-        const sqlite3 = require('sqlite3').verbose();
+        // const sqlite3 = // require('sqlite3'); // Removed - using MongoDB
         const db = new sqlite3.Database('./data/billing.db');
 
         // Ensure voucher_generation_settings table exists
@@ -949,7 +949,7 @@ router.post('/save-voucher-online-settings-from-voucher', async (req, res) => {
             });
         }
 
-        const sqlite3 = require('sqlite3').verbose();
+        // const sqlite3 = // require('sqlite3'); // Removed - using MongoDB
         const db = new sqlite3.Database('./data/billing.db');
 
         // Update settings for each package
